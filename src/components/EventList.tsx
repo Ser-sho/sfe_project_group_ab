@@ -33,3 +33,4 @@ const EventList = async ({ dateParam }: { dateParam: string | undefined }) => {
 };
 
 export default EventList;
+{/**/}

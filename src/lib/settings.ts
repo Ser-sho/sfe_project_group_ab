@@ -3,6 +3,7 @@ export const ITEM_PER_PAGE = 10
 type RouteAccessMap = {
   [key: string]: string[];
 };
+// we need to add Room bookings ...
 
 export const routeAccessMap: RouteAccessMap = {
   "/admin(.*)": ["admin"],

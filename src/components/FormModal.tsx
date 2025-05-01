@@ -51,7 +51,7 @@ const ClassForm = dynamic(() => import("./forms/ClassForm"), {
 const ExamForm = dynamic(() => import("./forms/ExamForm"), {
   loading: () => <h1>Loading...</h1>,
 });
-// TODO: OTHER FORMS
+// TODO: the remaining   forms such as the announcements 
 
 const forms: {
   [key: string]: (
@@ -180,3 +180,4 @@ const FormModal = ({
 };
 
 export default FormModal;
+{/**/}

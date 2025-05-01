@@ -383,6 +383,7 @@ export const createExam = async (
     //     return { success: false, error: true };
     //   }
     // }
+    //
 
     await prisma.exam.create({
       data: {

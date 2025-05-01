@@ -33,3 +33,4 @@ const BigCalendarContainer = async ({
 };
 
 export default BigCalendarContainer;
+{/**/}

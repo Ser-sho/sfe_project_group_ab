@@ -22,3 +22,4 @@ const StudentAttendanceCard = async ({ id }: { id: string }) => {
 };
 
 export default StudentAttendanceCard;
+{/**/}

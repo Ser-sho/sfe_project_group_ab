@@ -70,7 +70,7 @@ const AnnouncementListPage = async ({
 
   const p = page ? parseInt(page) : 1;
 
-  // URL PARAMS CONDITION
+  // URL PARAMS CONDITIONS
 
   const query: Prisma.AnnouncementWhereInput = {};
 

@@ -54,3 +54,4 @@ const AttendanceChart = ({
 };
 
 export default AttendanceChart;
+{/**/}

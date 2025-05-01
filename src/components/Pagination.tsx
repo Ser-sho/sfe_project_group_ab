@@ -60,3 +60,4 @@ const Pagination = ({ page, count }: { page: number; count: number }) => {
 };
 
 export default Pagination;
+{/**/}

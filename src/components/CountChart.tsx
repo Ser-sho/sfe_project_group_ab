@@ -52,3 +52,4 @@ const CountChart = ({ boys, girls }: { boys: number; girls: number }) => {
 };
 
 export default CountChart;
+{/**/}

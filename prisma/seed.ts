@@ -189,7 +189,7 @@ async function main() {
     });
   }
 
-  // ANNOUNCEMENT
+  // ANNOUNCEMENTS
   for (let i = 1; i <= 5; i++) {
     await prisma.announcement.create({
       data: {

@@ -70,3 +70,4 @@ const Announcements = async () => {
 };
 
 export default Announcements;
+{/**/}

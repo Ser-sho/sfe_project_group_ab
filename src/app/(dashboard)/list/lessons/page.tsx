@@ -74,7 +74,7 @@ const renderRow = (item: LessonList) => (
 
   const p = page ? parseInt(page) : 1;
 
-  // URL PARAMS CONDITION
+  // URL PARAMS CONDITIONS
 
   const query: Prisma.LessonWhereInput = {};
 
