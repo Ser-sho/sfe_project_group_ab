@@ -1,7 +1,9 @@
 "use client";
 
 import {
+  deleteAnnouncement,
   deleteClass,
+  deleteEvent,
   deleteExam,
   deleteStudent,
   deleteSubject,
@@ -14,6 +16,8 @@ import { Dispatch, SetStateAction, useEffect, useState } from "react";
 import { useFormState } from "react-dom";
 import { toast } from "react-toastify";
 import { FormContainerProps } from "./FormContainer";
+//import Announcements from "./Announcements";
+//import AnnouncementForm from "./forms/AnnouncementForm";
 
 const deleteActionMap = {
   subject: deleteSubject,
@@ -27,8 +31,8 @@ const deleteActionMap = {
   assignment: deleteSubject,
   result: deleteSubject,
   attendance: deleteSubject,
-  event: deleteSubject,
-  announcement: deleteSubject,
+  event: deleteEvent,// ADDED
+  announcement: deleteAnnouncement, // ADDED
 };
 
 // USE LAZY LOADING
@@ -49,6 +53,12 @@ const ClassForm = dynamic(() => import("./forms/ClassForm"), {
   loading: () => <h1>Loading...</h1>,
 });
 const ExamForm = dynamic(() => import("./forms/ExamForm"), {
+  loading: () => <h1>Loading...</h1>,
+});
+const AnnouncementForm = dynamic(() => import("./forms/AnnouncementForm"), {
+  loading: () => <h1>Loading...</h1>,
+});
+const EventForm = dynamic(() => import("./forms/EventForm"), {
   loading: () => <h1>Loading...</h1>,
 });
 // TODO: the remaining   forms such as the announcements 
@@ -95,6 +105,24 @@ const forms: {
   ),
   exam: (setOpen, type, data, relatedData) => (
     <ExamForm
+      type={type}
+      data={data}
+      setOpen={setOpen}
+      relatedData={relatedData}
+    />
+    // TODO OTHER LIST ITEMS start
+  ),
+  announcement: (setOpen, type, data, relatedData) => (
+    <AnnouncementForm
+      type={type}
+      data={data}
+      setOpen={setOpen}
+      relatedData={relatedData}
+    />
+    // TODO OTHER LIST ITEMS
+  ),
+  event: (setOpen, type, data, relatedData) => (
+    <EventForm
       type={type}
       data={data}
       setOpen={setOpen}

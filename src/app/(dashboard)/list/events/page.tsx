@@ -44,7 +44,7 @@ const EventListPage = async ({
       accessor: "endTime",
       className: "hidden md:table-cell",
     },
-    ...(role === "admin"
+    ...(role === "admin" || role === "teacher" || role === "student"// I MUST CHANGE THIS  2 52 56 AND ADD TEA...
       ? [
           {
             header: "Actions",
@@ -80,7 +80,7 @@ const EventListPage = async ({
       </td>
       <td>
         <div className="flex items-center gap-2">
-          {role === "admin" && (
+          {(role === "admin" || role === "teacher" || role === "student") && (  // ADD THIS  = WHAT THIS IN THE ANNOUNCEMENT PAGE
             <>
               <FormContainer table="event" type="update" data={item} />
               <FormContainer table="event" type="delete" id={item.id} />
@@ -121,12 +121,12 @@ const EventListPage = async ({
     parent: { students: { some: { parentId: currentUserId! } } },
   };
 
-  query.OR = [
+  {/*query.OR = [
     { classId: null },
     {
       class: roleConditions[role as keyof typeof roleConditions] || {},
     },
-  ];
+  ];*/}
 
   const [data, count] = await prisma.$transaction([
     prisma.event.findMany({
@@ -144,7 +144,7 @@ const EventListPage = async ({
     <div className="bg-white p-4 rounded-md flex-1 m-4 mt-0">
       {/* TOP */}
       <div className="flex items-center justify-between">
-        <h1 className="hidden md:block text-lg font-semibold">All Events</h1>
+        <h1 className="hidden md:block text-lg font-semibold">All Bookings</h1>
         <div className="flex flex-col md:flex-row items-center gap-4 w-full md:w-auto">
           <TableSearch />
           <div className="flex items-center gap-4 self-end">
@@ -154,7 +154,8 @@ const EventListPage = async ({
             <button className="w-8 h-8 flex items-center justify-center rounded-full bg-lamaYellow">
               <Image src="/sort.png" alt="" width={14} height={14} />
             </button>
-            {role === "admin" && <FormContainer table="event" type="create" />}
+            {/*WHAT THIS IN THE ANNOUNCEMENT PAGE*/}
+            {(role === "admin" || role === "teacher" || role === "student" ) && <FormContainer table="event" type="create" />} 
           </div>
         </div>
       </div>

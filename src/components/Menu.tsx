@@ -14,7 +14,7 @@ const menuItems = [
       },
       {
         icon: "/teacher.png",
-        label: "Teachers",
+        label: "Lectures",
         href: "/list/teachers",
         visible: ["admin", "teacher"],
       },
@@ -24,12 +24,7 @@ const menuItems = [
         href: "/list/students",
         visible: ["admin", "teacher"],
       },
-      {
-        icon: "/parent.png",
-        label: "Parents",
-        href: "/list/parents",
-        visible: ["admin", "teacher"],
-      },
+      
       {
         icon: "/subject.png",
         label: "Subjects",
@@ -74,14 +69,8 @@ const menuItems = [
       },
       {
         icon: "/calendar.png",
-        label: "Events",
+        label: "Room Booking",
         href: "/list/events",
-        visible: ["admin", "teacher", "student", "parent"],
-      },
-      {
-        icon: "/message.png",
-        label: "Messages",
-        href: "/list/messages",
         visible: ["admin", "teacher", "student", "parent"],
       },
       {
@@ -107,12 +96,7 @@ const menuItems = [
         href: "/settings",
         visible: ["admin", "teacher", "student", "parent"],
       },
-      {
-        icon: "/logout.png",
-        label: "Logout",
-        href: "/logout",
-        visible: ["admin", "teacher", "student", "parent"],
-      },
+      
     ],
   },
 ];

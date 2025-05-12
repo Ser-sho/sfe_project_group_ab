@@ -86,4 +86,28 @@ export const examSchema = z.object({
   lessonId: z.coerce.number({ message: "Lesson is required!" }),
 });
 
+
 export type ExamSchema = z.infer<typeof examSchema>;
+
+// must look at
+export const announcementSchema = z.object({
+  id: z.coerce.number().optional(),
+  title: z.string().min(1, { message: "Title name is required!" }),
+  description: z.string().min(1, { message: "description is required!" }),
+  date: z.coerce.date({ message: "date is required!" }),
+  classId: z.coerce.number().min(1, { message: "Class is required!" }),
+});
+
+export type AnnouncementSchema = z.infer<typeof announcementSchema>;
+
+// must look at
+export const eventSchema = z.object({
+  id: z.coerce.number().optional(),
+  title: z.string().min(1, { message: "Title name is required!" }),
+  description: z.string().min(1, { message: "description is required!" }),
+  startTime: z.coerce.date({ message: "startTime is required!" }),
+  endTime: z.coerce.date({ message: "endTime is required!" }),
+  classId: z.coerce.number().min(1, { message: "Class is required!" }),
+});
+
+export type EventSchema = z.infer<typeof eventSchema>;

@@ -46,7 +46,7 @@ const AssignmentListPage = async ({
       accessor: "dueDate",
       className: "hidden md:table-cell",
     },
-    ...(role === "admin" || role === "teacher"
+    ...(role === "admin" || role === "teacher" // WHAT THIS IN THE ANNOUNCEMENT PAGE
       ? [
           {
             header: "Actions",

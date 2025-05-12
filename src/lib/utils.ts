@@ -1,10 +1,14 @@
+//import { auth } from "@clerk/nextjs/server";
 
+{/*const { userId , sessionClaims} = auth();
+export const role = (sessionClaims?.metadata as {role?: string})?.role;
+export const currentUserId = userId;*/}
 
 const getLatestMonday = (): Date => {
   const today = new Date();
   const dayOfWeek = today.getDay();
   const daysSinceMonday = dayOfWeek === 0 ? 6 : dayOfWeek - 1;
-  const latestMonday = today;
+  const latestMonday = today; //3:50:38 must edit
   latestMonday.setDate(today.getDate() - daysSinceMonday);
   return latestMonday;
 };

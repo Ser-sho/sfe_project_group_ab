@@ -8,8 +8,8 @@ import "react-toastify/dist/ReactToastify.css";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "Campus Service Management System",
-  description: "Next.js Campus Management System",
+  title: "Smart Campus Services Portal",
+  description: "Next.js Smart Campus Services Portal",
 };
 
 export default function RootLayout({

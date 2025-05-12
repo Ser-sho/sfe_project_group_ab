@@ -34,7 +34,8 @@ const AnnouncementListPage = async ({
       accessor: "date",
       className: "hidden md:table-cell",
     },
-    ...(role === "admin"
+    // ADD TEACHER COPY IT IN THE ASSIGNMENT PAGE
+    ...(role === "admin" || role === "teacher"
       ? [
           {
             header: "Actions",
@@ -56,7 +57,7 @@ const AnnouncementListPage = async ({
       </td>
       <td>
         <div className="flex items-center gap-2">
-          {role === "admin" && (
+          {(role === "admin" || role === "teacher") && ( //ADD TEARCHER
             <>
               <FormContainer table="announcement" type="update" data={item} />
               <FormContainer table="announcement" type="delete" id={item.id} />
@@ -96,12 +97,13 @@ const AnnouncementListPage = async ({
     parent: { students: { some: { parentId: currentUserId! } } },
   };
 
-  query.OR = [
+ {/*
+   query.OR = [
     { classId: null },
     {
       class: roleConditions[role as keyof typeof roleConditions] || {},
     },
-  ];
+  ];*/}
 
   const [data, count] = await prisma.$transaction([
     prisma.announcement.findMany({
@@ -131,7 +133,7 @@ const AnnouncementListPage = async ({
             <button className="w-8 h-8 flex items-center justify-center rounded-full bg-lamaYellow">
               <Image src="/sort.png" alt="" width={14} height={14} />
             </button>
-            {role === "admin" && (
+            {(role === "admin" || role === "teacher")&& ( // ADD TEACHER
               <FormContainer table="announcement" type="create" />
             )}
           </div>
