@@ -24,8 +24,8 @@ model Student {
   bloodType   String
   sex         UserSex
   createdAt   DateTime     @default(now())
-  parentId    String
-  parent      Parent       @relation(fields: [parentId], references: [id])
+  parentId    String?
+  parent      Parent?      @relation(fields: [parentId], references: [id])
   classId     Int
   class       Class        @relation(fields: [classId], references: [id])
   gradeId     Int
@@ -35,7 +35,7 @@ model Student {
   birthday    DateTime
 }
 
-model Teacher {
+model Lecturer {
   id        String    @id
   username  String    @unique
   name      String
@@ -79,20 +79,20 @@ model Class {
   capacity Int
 
   supervisorId  String?
-  supervisor    Teacher?       @relation(fields: [supervisorId], references: [id])
+  supervisor    Lecturer?      @relation(fields: [supervisorId], references: [id])
   lessons       Lesson[]
   students      Student[]
   gradeId       Int
   grade         Grade          @relation(fields: [gradeId], references: [id])
-  events        Event[]
+  rooms         Room[]
   announcements Announcement[]
 }
 
 model Subject {
-  id       Int       @id @default(autoincrement())
-  name     String    @unique
-  teachers Teacher[]
-  lessons  Lesson[]
+  id        Int        @id @default(autoincrement())
+  name      String     @unique
+  lecturers Lecturer[]
+  lessons   Lesson[]
 }
 
 model Lesson {
@@ -106,8 +106,8 @@ model Lesson {
   subject     Subject      @relation(fields: [subjectId], references: [id])
   classId     Int
   class       Class        @relation(fields: [classId], references: [id])
-  teacherId   String
-  teacher     Teacher      @relation(fields: [teacherId], references: [id])
+  lecturerId  String
+  lecturer    Lecturer    @relation(fields: [lecturerId], references: [id])
   exams       Exam[]
   assignments Assignment[]
   attendances Attendance[]
@@ -158,7 +158,7 @@ model Attendance {
   lesson    Lesson  @relation(fields: [lessonId], references: [id])
 }
 
-model Event {
+model Room {
   id          Int      @id @default(autoincrement())
   title       String
   description String

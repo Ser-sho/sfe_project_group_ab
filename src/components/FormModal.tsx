@@ -2,12 +2,15 @@
 
 import {
   deleteAnnouncement,
+  deleteAssignment,
   deleteClass,
-  deleteEvent,
   deleteExam,
+  deleteLecturer,
+  deleteLesson,
+  deleteResult,
+  deleteRoom,
   deleteStudent,
   deleteSubject,
-  deleteTeacher,
 } from "@/lib/actions";
 import dynamic from "next/dynamic";
 import Image from "next/image";
@@ -22,17 +25,18 @@ import { FormContainerProps } from "./FormContainer";
 const deleteActionMap = {
   subject: deleteSubject,
   class: deleteClass,
-  teacher: deleteTeacher,
+  lecturer: deleteLecturer,
   student: deleteStudent,
   exam: deleteExam,
+  room: deleteRoom,
+  lesson: deleteLesson,
+  assignment: deleteAssignment,
+  result: deleteResult,
+  announcement: deleteAnnouncement,
 // TODO: OTHER DELETE ACTIONS
   parent: deleteSubject,
-  lesson: deleteSubject,
-  assignment: deleteSubject,
-  result: deleteSubject,
   attendance: deleteSubject,
-  event: deleteEvent,// ADDED
-  announcement: deleteAnnouncement, // ADDED
+   
 };
 
 // USE LAZY LOADING
@@ -40,7 +44,7 @@ const deleteActionMap = {
 // import TeacherForm from "./forms/TeacherForm";
 // import StudentForm from "./forms/StudentForm";
 
-const TeacherForm = dynamic(() => import("./forms/TeacherForm"), {
+const LecturerForm = dynamic(() => import("./forms/LecturerForm"), {
   loading: () => <h1>Loading...</h1>,
 });
 const StudentForm = dynamic(() => import("./forms/StudentForm"), {
@@ -58,7 +62,16 @@ const ExamForm = dynamic(() => import("./forms/ExamForm"), {
 const AnnouncementForm = dynamic(() => import("./forms/AnnouncementForm"), {
   loading: () => <h1>Loading...</h1>,
 });
-const EventForm = dynamic(() => import("./forms/EventForm"), {
+const RoomForm = dynamic(() => import("./forms/RoomForm"), {
+  loading: () => <h1>Loading...</h1>,
+});
+const LessonForm = dynamic(() => import("./forms/LessonForm"), {
+  loading: () => <h1>Loading...</h1>,
+});
+const AssignmentForm = dynamic(() => import("./forms/AssignmentForm"), {
+  loading: () => <h1>Loading...</h1>,
+});
+const ResultForm = dynamic(() => import("./forms/ResultForm"), {
   loading: () => <h1>Loading...</h1>,
 });
 // TODO: the remaining   forms such as the announcements 
@@ -87,8 +100,8 @@ const forms: {
       relatedData={relatedData}
     />
   ),
-  teacher: (setOpen, type, data, relatedData) => (
-    <TeacherForm
+  lecturer: (setOpen, type, data, relatedData) => (
+    <LecturerForm
       type={type}
       data={data}
       setOpen={setOpen}
@@ -121,8 +134,35 @@ const forms: {
     />
     // TODO OTHER LIST ITEMS
   ),
-  event: (setOpen, type, data, relatedData) => (
-    <EventForm
+  room: (setOpen, type, data, relatedData) => (
+    <RoomForm
+      type={type}
+      data={data}
+      setOpen={setOpen}
+      relatedData={relatedData}
+    />
+    // TODO OTHER LIST ITEMS
+  ),
+  lesson: (setOpen, type, data, relatedData) => (
+    <LessonForm
+      type={type}
+      data={data}
+      setOpen={setOpen}
+      relatedData={relatedData}
+    />
+    // TODO OTHER LIST ITEMS
+  ),
+  assignment: (setOpen, type, data, relatedData) => (
+    <AssignmentForm
+      type={type}
+      data={data}
+      setOpen={setOpen}
+      relatedData={relatedData}
+    />
+    // TODO OTHER LIST ITEMS
+  ),
+  result: (setOpen, type, data, relatedData) => (
+    <ResultForm
       type={type}
       data={data}
       setOpen={setOpen}

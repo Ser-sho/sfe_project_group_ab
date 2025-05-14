@@ -89,7 +89,10 @@ const StudentListPage = async ({
             // <button className="w-7 h-7 flex items-center justify-center rounded-full bg-lamaPurple">
             //   <Image src="/delete.png" alt="" width={16} height={16} />
             // </button>
+            <>
+          
             <FormContainer table="student" type="delete" id={item.id} />
+            </>
           )}
         </div>
       </td>
@@ -108,11 +111,11 @@ const StudentListPage = async ({
     for (const [key, value] of Object.entries(queryParams)) {
       if (value !== undefined) {
         switch (key) {
-          case "teacherId":
+          case "lecturerId":
             query.class = {
               lessons: {
                 some: {
-                  teacherId: value,
+                  lecturerId: value,
                 },
               },
             };

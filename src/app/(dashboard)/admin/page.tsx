@@ -1,9 +1,9 @@
 import Announcements from "@/components/Announcements";
 import AttendanceChartContainer from "@/components/AttendanceChartContainer";
 import CountChartContainer from "@/components/CountChartContainer";
-import EventCalendarContainer from "@/components/EventCalendarContainer";
 import FinanceChart from "@/components/FinanceChart";
 import UserCard from "@/components/UserCard";
+import RoomCalendarContainer from "@/components/RoomCalendarContainer";
 
 const AdminPage = ({
   searchParams,
@@ -17,7 +17,7 @@ const AdminPage = ({
         {/* USER CARDS */}
         <div className="flex gap-4 justify-between flex-wrap">
           <UserCard type="admin" />
-          <UserCard type="lecture" /> 
+          <UserCard type="lecturer" /> 
           <UserCard type="student" />
           {/*<UserCard type="parent" />*/}
         </div>
@@ -39,7 +39,7 @@ const AdminPage = ({
       </div>
       {/* RIGHT */}
       <div className="w-full lg:w-1/3 flex flex-col gap-8">
-        <EventCalendarContainer searchParams={searchParams}/>
+        <RoomCalendarContainer searchParams={searchParams}/>
         <Announcements />
       </div>
     </div>

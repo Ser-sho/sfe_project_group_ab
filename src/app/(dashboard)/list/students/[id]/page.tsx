@@ -167,9 +167,9 @@ const SingleStudentPage = async ({
             </Link>
             <Link
               className="p-3 rounded-md bg-lamaPurpleLight"
-              href={`/list/teachers?classId=${student.class.id}`}
+              href={`/list/lecturers?classId=${student.class.id}`}
             >
-              Student&apos;s Teachers
+              Student&apos;s Lecturers
             </Link>
             <Link
               className="p-3 rounded-md bg-pink-50"

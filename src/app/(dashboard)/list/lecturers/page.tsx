@@ -3,15 +3,15 @@ import Pagination from "@/components/Pagination";
 import Table from "@/components/Table";
 import TableSearch from "@/components/TableSearch";
 import prisma from "@/lib/prisma";
-import { Class, Prisma, Subject, Teacher } from "@prisma/client";
+import { Class, Prisma, Subject, Lecturer } from "@prisma/client";
 import Image from "next/image";
 import Link from "next/link";
 import { ITEM_PER_PAGE } from "@/lib/settings";
 import { auth } from "@clerk/nextjs/server";
 
-type TeacherList = Teacher & { subjects: Subject[] } & { classes: Class[] };
+type LecturerList = Lecturer & { subjects: Subject[] } & { classes: Class[] };
 
-const TeacherListPage = async ({
+const LecturerListPage = async ({
   searchParams,
 }: {
   searchParams: { [key: string]: string | undefined };
@@ -24,8 +24,8 @@ const TeacherListPage = async ({
       accessor: "info",
     },
     {
-      header: "Teacher ID",
-      accessor: "teacherId",
+      header: "lecturer ID",
+      accessor: "lecturerId",
       className: "hidden md:table-cell",
     },
     {
@@ -58,7 +58,7 @@ const TeacherListPage = async ({
       : []),
   ];
 
-  const renderRow = (item: TeacherList) => (
+  const renderRow = (item: LecturerList) => (
     <tr
       key={item.id}
       className="border-b border-gray-200 even:bg-slate-50 text-sm hover:bg-lamaPurpleLight"
@@ -96,7 +96,10 @@ const TeacherListPage = async ({
             // <button className="w-7 h-7 flex items-center justify-center rounded-full bg-lamaPurple">
             //   <Image src="/delete.png" alt="" width={16} height={16} />
             // </button>
-            <FormContainer table="teacher" type="delete" id={item.id} />
+            <>
+            
+            <FormContainer table="lecturer" type="delete" id={item.id} />
+            </>
           )}
         </div>
       </td>
@@ -108,7 +111,7 @@ const TeacherListPage = async ({
 
   // URL PARAMS CONDITIONS
 
-  const query: Prisma.TeacherWhereInput = {};
+  const query: Prisma.LecturerWhereInput = {};
 
   if (queryParams) {
     for (const [key, value] of Object.entries(queryParams)) {
@@ -132,7 +135,7 @@ const TeacherListPage = async ({
   }
 
   const [data, count] = await prisma.$transaction([
-    prisma.teacher.findMany({
+    prisma.lecturer.findMany({
       where: query,
       include: {
         subjects: true,
@@ -141,7 +144,7 @@ const TeacherListPage = async ({
       take: ITEM_PER_PAGE,
       skip: ITEM_PER_PAGE * (p - 1),
     }),
-    prisma.teacher.count({ where: query }),
+    prisma.lecturer.count({ where: query }),
   ]);
 
   return (
@@ -159,7 +162,7 @@ const TeacherListPage = async ({
               <Image src="/sort.png" alt="" width={14} height={14} />
             </button>
             {role === "admin" && (
-              <FormContainer table="teacher" type="create" />
+              <FormContainer table="lecturer" type="create" />
             )}
           </div>
         </div>
@@ -172,4 +175,4 @@ const TeacherListPage = async ({
   );
 };
 
-export default TeacherListPage;
+export default LecturerListPage;

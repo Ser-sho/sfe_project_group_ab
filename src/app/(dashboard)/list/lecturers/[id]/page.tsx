@@ -5,12 +5,13 @@ import FormContainer from "@/components/FormContainer";
 import Performance from "@/components/Performance";
 import prisma from "@/lib/prisma";
 import { auth } from "@clerk/nextjs/server";
-import { Teacher } from "@prisma/client";
+import { Lecturer } from "@prisma/client";
 import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 
-const SingleTeacherPage = async ({
+
+const SingleLecturerPage = async ({
   params: { id },
 }: {
   params: { id: string };
@@ -18,11 +19,11 @@ const SingleTeacherPage = async ({
   const { sessionClaims } = auth();
   const role = (sessionClaims?.metadata as { role?: string })?.role;
 
-  const teacher:
-    | (Teacher & {
+  const lecturer:
+    | (Lecturer & {
         _count: { subjects: number; lessons: number; classes: number };
       })
-    | null = await prisma.teacher.findUnique({
+    | null = await prisma.lecturer.findUnique({
     where: { id },
     include: {
       _count: {
@@ -35,7 +36,7 @@ const SingleTeacherPage = async ({
     },
   });
 
-  if (!teacher) {
+  if (!lecturer) {
     return notFound();
   }
   return (
@@ -48,7 +49,7 @@ const SingleTeacherPage = async ({
           <div className="bg-lamaSky py-6 px-4 rounded-md flex-1 flex gap-4">
             <div className="w-1/3">
               <Image
-                src={teacher.img || "/noAvatar.png"}
+                src={lecturer.img || "/noAvatar.png"}
                 alt=""
                 width={144}
                 height={144}
@@ -58,10 +59,10 @@ const SingleTeacherPage = async ({
             <div className="w-2/3 flex flex-col justify-between gap-4">
               <div className="flex items-center gap-4">
                 <h1 className="text-xl font-semibold">
-                  {teacher.name + " " + teacher.surname}
+                  {lecturer.name + " " + lecturer.surname}
                 </h1>
                 {role === "admin" && (
-                  <FormContainer table="teacher" type="update" data={teacher} />
+                  <FormContainer table="lecturer" type="update" data={lecturer} />
                 )}
               </div>
               <p className="text-sm text-gray-500">
@@ -70,21 +71,21 @@ const SingleTeacherPage = async ({
               <div className="flex items-center justify-between gap-2 flex-wrap text-xs font-medium">
                 <div className="w-full md:w-1/3 lg:w-full 2xl:w-1/3 flex items-center gap-2">
                   <Image src="/blood.png" alt="" width={14} height={14} />
-                  <span>{teacher.bloodType}</span>
+                  <span>{lecturer.bloodType}</span>
                 </div>
                 <div className="w-full md:w-1/3 lg:w-full 2xl:w-1/3 flex items-center gap-2">
                   <Image src="/date.png" alt="" width={14} height={14} />
                   <span>
-                    {new Intl.DateTimeFormat("en-GB").format(teacher.birthday)}
+                    {new Intl.DateTimeFormat("en-GB").format(lecturer.birthday)}
                   </span>
                 </div>
                 <div className="w-full md:w-1/3 lg:w-full 2xl:w-1/3 flex items-center gap-2">
                   <Image src="/mail.png" alt="" width={14} height={14} />
-                  <span>{teacher.email || "-"}</span>
+                  <span>{lecturer.email || "-"}</span>
                 </div>
                 <div className="w-full md:w-1/3 lg:w-full 2xl:w-1/3 flex items-center gap-2">
                   <Image src="/phone.png" alt="" width={14} height={14} />
-                  <span>{teacher.phone || "-"}</span>
+                  <span>{lecturer.phone || "-"}</span>
                 </div>
               </div>
             </div>
@@ -116,7 +117,7 @@ const SingleTeacherPage = async ({
               />
               <div className="">
                 <h1 className="text-xl font-semibold">
-                  {teacher._count.subjects}
+                  {lecturer._count.subjects}
                 </h1>
                 <span className="text-sm text-gray-400">Branches</span>
               </div>
@@ -132,7 +133,7 @@ const SingleTeacherPage = async ({
               />
               <div className="">
                 <h1 className="text-xl font-semibold">
-                  {teacher._count.lessons}
+                  {lecturer._count.lessons}
                 </h1>
                 <span className="text-sm text-gray-400">Lessons</span>
               </div>
@@ -148,7 +149,7 @@ const SingleTeacherPage = async ({
               />
               <div className="">
                 <h1 className="text-xl font-semibold">
-                  {teacher._count.classes}
+                  {lecturer._count.classes}
                 </h1>
                 <span className="text-sm text-gray-400">Classes</span>
               </div>
@@ -157,8 +158,8 @@ const SingleTeacherPage = async ({
         </div>
         {/* BOTTOM */}
         <div className="mt-4 bg-white rounded-md p-4 h-[800px]">
-          <h1>Teacher&apos;s Schedule</h1>
-          <BigCalendarContainer type="teacherId" id={teacher.id} />
+          <h1>Lecturer&apos;s Schedule</h1>
+          <BigCalendarContainer type="lecturerId" id={lecturer.id} />
         </div>
       </div>
       {/* RIGHT */}
@@ -168,33 +169,33 @@ const SingleTeacherPage = async ({
           <div className="mt-4 flex gap-4 flex-wrap text-xs text-gray-500">
            <Link
               className="p-3 rounded-md bg-lamaSkyLight"
-              href={`/list/classes?supervisorId=${teacher.id}`}
+              href={`/list/classes?supervisorId=${lecturer.id}`}
             >
-              Teacher&apos;s Classes
+              Lecturer&apos;s Classes
             </Link>
             <Link
               className="p-3 rounded-md bg-lamaPurpleLight"
-              href={`/list/students?teacherId=${teacher.id}`}
+              href={`/list/students?lecturerId=${lecturer.id}`}
             >
-              Teacher&apos;s Students
+              Lecturer&apos;s Students
             </Link>
             <Link
               className="p-3 rounded-md bg-lamaYellowLight"
-              href={`/list/lessons?teacherId=${teacher.id}`}
+              href={`/list/lessons?lecturerId=${lecturer.id}`}
             >
-              Teacher&apos;s Lessons
+              Lecturer&apos;s Lessons
             </Link>
             <Link
               className="p-3 rounded-md bg-pink-50"
-              href={`/list/exams?teacherId=${teacher.id}`}
+              href={`/list/exams?lecturerId=${lecturer.id}`}
             >
-              Teacher&apos;s Exams
+              Lecturer&apos;s Exams
             </Link>
             <Link
               className="p-3 rounded-md bg-lamaSkyLight"
-              href={`/list/assignments?teacherId=${teacher.id}`}
+              href={`/list/assignments?lecturerId=${lecturer.id}`}
             >
-              Teacher&apos;s Assignments
+              Lecturer&apos;s Assignments
             </Link>
           </div>
         </div>
@@ -205,4 +206,4 @@ const SingleTeacherPage = async ({
   );
 };
 
-export default SingleTeacherPage;
+export default SingleLecturerPage;

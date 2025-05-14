@@ -9,7 +9,7 @@ type ValuePiece = Date | null;
 
 type Value = ValuePiece | [ValuePiece, ValuePiece];
 
-const EventCalendar = () => {
+const RoomCalendar = () => {
   const [value, onChange] = useState<Value>(new Date());
 
   const router = useRouter();
@@ -23,5 +23,5 @@ const EventCalendar = () => {
   return <Calendar onChange={onChange} value={value} />;
 };
 
-export default EventCalendar;
+export default RoomCalendar;
 {/**/}

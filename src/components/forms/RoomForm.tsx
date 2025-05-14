@@ -3,24 +3,21 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import InputField from "../InputField";
+import { Dispatch, SetStateAction, useEffect, useState } from "react";
 import {
-  examSchema,
-  ExamSchema,
-  subjectSchema,
-  SubjectSchema,
-} from "@/lib/formValidationSchemas";
-import {
-  createExam,
-  createSubject,
-  updateExam,
-  updateSubject,
-} from "@/lib/actions";
+     announcementSchema,
+     AnnouncementSchema,
+     roomSchema,
+     RoomSchema,
+     
+ } from "@/lib/formValidationSchemas";
 import { useFormState } from "react-dom";
-import { Dispatch, SetStateAction, useEffect } from "react";
-import { toast } from "react-toastify";
+import { createRoom, updateRoom } from "@/lib/actions";
 import { useRouter } from "next/navigation";
+import { toast } from "react-toastify";
 
-const ExamForm = ({
+
+const RoomForm = ({
   type,
   data,
   setOpen,
@@ -35,14 +32,12 @@ const ExamForm = ({
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<ExamSchema>({
-    resolver: zodResolver(examSchema),
+  } = useForm<RoomSchema>({ // need it here
+    resolver: zodResolver(roomSchema), // rot chema 4:07:49
   });
 
-  // AFTER REACT 19 IT'LL BE USEACTIONSTATE
-
   const [state, formAction] = useFormState(
-    type === "create" ? createExam : updateExam,
+    type === "create" ? createRoom : updateRoom,
     {
       success: false,
       error: false,
@@ -58,40 +53,47 @@ const ExamForm = ({
 
   useEffect(() => {
     if (state.success) {
-      toast(`Exam has been ${type === "create" ? "created" : "updated"}!`);
+      toast(`Room has been ${type === "create" ? "created" : "updated"}!`);
       setOpen(false);
       router.refresh();
     }
   }, [state, router, type, setOpen]);
 
-  const { lessons } = relatedData;
+  const { classes } = relatedData;
 
   return (
     <form className="flex flex-col gap-8" onSubmit={onSubmit}>
       <h1 className="text-xl font-semibold">
-        {type === "create" ? "Create a new exam" : "Update the exam"}
+        {type === "create" ? "Create a new booking" : "Update the booking"} {/* change*/}
       </h1>
-
+      
       <div className="flex justify-between flex-wrap gap-4">
         <InputField
-          label="Exam title"
+          label="room title"
           name="title"
           defaultValue={data?.title}
           register={register}
           error={errors?.title}
         />
         <InputField
-          label="Start Date"
+          label="room description"
+          name="description"
+          defaultValue={data?.description}
+          register={register}
+          error={errors?.description}
+        />
+        <InputField
+          label="room startTime"
           name="startTime"
-          defaultValue={data?.startTime}
+          defaultValue={data?.datetime}
           register={register}
           error={errors?.startTime}
           type="datetime-local"
         />
         <InputField
-          label="End Date"
+          label="room endTime"
           name="endTime"
-          defaultValue={data?.endTime}
+          defaultValue={data?.datetime}
           register={register}
           error={errors?.endTime}
           type="datetime-local"
@@ -104,24 +106,33 @@ const ExamForm = ({
             register={register}
             error={errors?.id}
             hidden
-          />
+         />
+      
         )}
         <div className="flex flex-col gap-2 w-full md:w-1/4">
-          <label className="text-xs text-gray-500">Lesson</label>
+          <label className="text-xs text-gray-500">booking</label>
           <select
             className="ring-[1.5px] ring-gray-300 p-2 rounded-md text-sm w-full"
-            {...register("lessonId")}
-            defaultValue={data?.lessonId}  //must edit lesson
+            {...register("classId")}
+            defaultValue={data?.classId}
           >
-            {lessons.map((lesson: { id: number; name: string }) => (
-              <option value={lesson.id} key={lesson.id}>
-                {lesson.name}
+            {classes.map(
+             (classItem: { 
+                    id: number;
+                    name: string;
+                    capacity: number;
+                    _count: { rooms: number };
+             }) => (
+              <option value={classItem.id} key={classItem.id}>
+               ({classItem.name} -{" "}
+                  {classItem._count.rooms + "/" + classItem.capacity}{" "}
+                  Capacity)
               </option>
             ))}
           </select>
-          {errors.lessonId?.message && (
+          {errors.classId?.message && (
             <p className="text-xs text-red-400">
-              {errors.lessonId.message.toString()}
+              {errors.classId.message.toString()}
             </p>
           )}
         </div>
@@ -136,5 +147,5 @@ const ExamForm = ({
   );
 };
 
-export default ExamForm;
-{/*exam*/}
+export default RoomForm;
+{/**/}

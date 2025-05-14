@@ -4,11 +4,11 @@ import Table from "@/components/Table";
 import TableSearch from "@/components/TableSearch";
 import prisma from "@/lib/prisma";
 import { ITEM_PER_PAGE } from "@/lib/settings";
-import { Class, Prisma, Teacher } from "@prisma/client";
+import { Class, Prisma, Lecturer } from "@prisma/client";
 import Image from "next/image";
 import { auth } from "@clerk/nextjs/server";
 
-type ClassList = Class & { supervisor: Teacher };
+type ClassList = Class & { supervisor: Lecturer };
 
 const ClassListPage = async ({
   searchParams,

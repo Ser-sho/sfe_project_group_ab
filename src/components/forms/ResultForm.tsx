@@ -4,15 +4,19 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import InputField from "../InputField";
 import {
-  classSchema,
-  ClassSchema,
+  examSchema,
+  ExamSchema,
+  resultSchema,
+  ResultSchema,
   subjectSchema,
   SubjectSchema,
 } from "@/lib/formValidationSchemas";
 import {
-  createClass,
+  createExam,
+  createResult,
   createSubject,
-  updateClass,
+  updateExam,
+  updateResult,
   updateSubject,
 } from "@/lib/actions";
 import { useFormState } from "react-dom";
@@ -20,7 +24,7 @@ import { Dispatch, SetStateAction, useEffect } from "react";
 import { toast } from "react-toastify";
 import { useRouter } from "next/navigation";
 
-const ClassForm = ({
+const RusultForm = ({
   type,
   data,
   setOpen,
@@ -35,14 +39,14 @@ const ClassForm = ({
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<ClassSchema>({
-    resolver: zodResolver(classSchema),
+  } = useForm<ResultSchema>({
+    resolver: zodResolver(resultSchema),
   });
 
-  // AFTER REACT 19 IT'LL BE USEACTIONSTATE
+  
 
   const [state, formAction] = useFormState(
-    type === "create" ? createClass : updateClass,
+    type === "create" ? createResult : updateResult,
     {
       success: false,
       error: false,
@@ -58,34 +62,27 @@ const ClassForm = ({
 
   useEffect(() => {
     if (state.success) {
-      toast(`Subject has been ${type === "create" ? "created" : "updated"}!`);
+      toast(`Exam has been ${type === "create" ? "created" : "updated"}!`);
       setOpen(false);
       router.refresh();
     }
   }, [state, router, type, setOpen]);
 
-  const { lecturers, grades } = relatedData;
+  const { students, assignments, exams } = relatedData;
 
   return (
     <form className="flex flex-col gap-8" onSubmit={onSubmit}>
       <h1 className="text-xl font-semibold">
-        {type === "create" ? "Create a new class" : "Update the class"}
+        {type === "create" ? "Create a new exam" : "Update the exam"}
       </h1>
 
       <div className="flex justify-between flex-wrap gap-4">
         <InputField
-          label="Class name"
-          name="name"
-          defaultValue={data?.name}
+          label="Result score"
+          name="score"
+          defaultValue={data?.score}
           register={register}
-          error={errors?.name}
-        />
-        <InputField
-          label="Capacity"
-          name="capacity"
-          defaultValue={data?.capacity}
-          register={register}
-          error={errors?.capacity}
+          error={errors?.score}
         />
         {data && (
           <InputField
@@ -98,50 +95,69 @@ const ClassForm = ({
           />
         )}
         <div className="flex flex-col gap-2 w-full md:w-1/4">
-          <label className="text-xs text-gray-500">Supervisor</label>
+          <label className="text-xs text-gray-500">Student</label>
           <select
             className="ring-[1.5px] ring-gray-300 p-2 rounded-md text-sm w-full"
-            {...register("supervisorId")}
-            defaultValue={data?.lecturers} // lectures 
+            {...register("studentId")}
+            defaultValue={data?.studentId}  //must edit lesson
           >
-            {lecturers.map(
-              (lecturer: { id: string; name: string; surname: string }) => (
-                <option
-                  value={lecturer.id}
-                  key={lecturer.id}
-                  selected={data && lecturer.id === data.supervisorId}
-                >
-                  {lecturer.name + " " + lecturer.surname}
-                </option>
-              )
-            )}
+            {students.map((student: { id: string; name: string; surname: string  }) => (
+              <option value={student.id} key={student.id}>
+                {student.name + " " + student.surname }
+              </option>
+            ))}
           </select>
-          {errors.supervisorId?.message && (
+          {errors.studentId?.message && (
             <p className="text-xs text-red-400">
-              {errors.supervisorId.message.toString()}
+              {errors.studentId.message.toString()}
             </p>
           )}
         </div>
         <div className="flex flex-col gap-2 w-full md:w-1/4">
-          <label className="text-xs text-gray-500">Grade</label>
+          <label className="text-xs text-gray-500">Exam</label>
           <select
             className="ring-[1.5px] ring-gray-300 p-2 rounded-md text-sm w-full"
-            {...register("gradeId")}
-            defaultValue={data?.gradeId}
+            {...register("examId")}
+            defaultValue={data?.examId}
           >
-            {grades.map((grade: { id: number; level: number }) => (
-              <option
-                value={grade.id}
-                key={grade.id}
-                selected={data && grade.id === data.gradeId}
-              >
-                {grade.level}
-              </option>
-            ))}
+            {exams?.map(
+              (exam: { id: string; title: string}) => (
+                <option
+                  value={exam.id}
+                  key={exam.id}
+                  >
+                  {exam.title}
+                </option>
+              )
+            )}
           </select>
-          {errors.gradeId?.message && (
+          {errors.examId?.message && (
             <p className="text-xs text-red-400">
-              {errors.gradeId.message.toString()}
+              {errors.examId.message.toString()}
+            </p>
+          )}
+        </div>
+        <div className="flex flex-col gap-2 w-full md:w-1/4">
+          <label className="text-xs text-gray-500">Assignment</label>
+          <select
+            className="ring-[1.5px] ring-gray-300 p-2 rounded-md text-sm w-full"
+            {...register("assignmentId")}
+            defaultValue={data?.assignmentId}
+          >
+            {assignments?.map(
+              (assignment: { id: string; title: string}) => (
+                <option
+                  value={assignment.id}
+                  key={assignment.id}
+                  >
+                  {assignment.title}
+                </option>
+              )
+            )}
+          </select>
+          {errors.assignmentId?.message && (
+            <p className="text-xs text-red-400">
+              {errors.assignmentId.message.toString()}
             </p>
           )}
         </div>
@@ -156,5 +172,5 @@ const ClassForm = ({
   );
 };
 
-export default ClassForm;
-{/*class*/}
+export default RusultForm;
+{/*exam*/}

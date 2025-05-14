@@ -4,13 +4,13 @@ import Table from "@/components/Table";
 import TableSearch from "@/components/TableSearch";
 import prisma from "@/lib/prisma";
 import { ITEM_PER_PAGE } from "@/lib/settings";
-import { Class, Event, Prisma } from "@prisma/client";
+import { Class, Room, Prisma } from "@prisma/client";
 import Image from "next/image";
 import { auth } from "@clerk/nextjs/server";
 
-type EventList = Event & { class: Class };
+type RoomList = Room & { class: Class };
 
-const EventListPage = async ({
+const RoomListPage = async ({
   searchParams,
 }: {
   searchParams: { [key: string]: string | undefined };
@@ -44,7 +44,7 @@ const EventListPage = async ({
       accessor: "endTime",
       className: "hidden md:table-cell",
     },
-    ...(role === "admin" || role === "teacher" || role === "student"// I MUST CHANGE THIS  2 52 56 AND ADD TEA...
+    ...(role === "admin" || role === "lecturer" || role === "student"// I MUST CHANGE THIS  2 52 56 AND ADD TEA...
       ? [
           {
             header: "Actions",
@@ -54,7 +54,7 @@ const EventListPage = async ({
       : []),
   ];
 
-  const renderRow = (item: EventList) => (
+  const renderRow = (item: RoomList) => (
     <tr
       key={item.id}
       className="border-b border-gray-200 even:bg-slate-50 text-sm hover:bg-lamaPurpleLight"
@@ -80,10 +80,10 @@ const EventListPage = async ({
       </td>
       <td>
         <div className="flex items-center gap-2">
-          {(role === "admin" || role === "teacher" || role === "student") && (  // ADD THIS  = WHAT THIS IN THE ANNOUNCEMENT PAGE
+          {(role === "admin" || role === "lecturer" || role === "student") && (  // ADD THIS  = WHAT THIS IN THE ANNOUNCEMENT PAGE
             <>
-              <FormContainer table="event" type="update" data={item} />
-              <FormContainer table="event" type="delete" id={item.id} />
+              <FormContainer table="room" type="update" data={item} />
+              <FormContainer table="room" type="delete" id={item.id} />
             </>
           )}
         </div>
@@ -97,7 +97,7 @@ const EventListPage = async ({
 
   // URL PARAMS CONDITIONS
 
-  const query: Prisma.EventWhereInput = {};
+  const query: Prisma.RoomWhereInput = {};
 
   if (queryParams) {
     for (const [key, value] of Object.entries(queryParams)) {
@@ -116,7 +116,7 @@ const EventListPage = async ({
   // ROLE CONDITIONS
 
   const roleConditions = {
-    teacher: { lessons: { some: { teacherId: currentUserId! } } },
+    lecturer: { lessons: { some: { lecturerId: currentUserId! } } },
     student: { students: { some: { id: currentUserId! } } },
     parent: { students: { some: { parentId: currentUserId! } } },
   };
@@ -129,7 +129,7 @@ const EventListPage = async ({
   ];*/}
 
   const [data, count] = await prisma.$transaction([
-    prisma.event.findMany({
+    prisma.room.findMany({
       where: query,
       include: {
         class: true,
@@ -137,7 +137,7 @@ const EventListPage = async ({
       take: ITEM_PER_PAGE,
       skip: ITEM_PER_PAGE * (p - 1),
     }),
-    prisma.event.count({ where: query }),
+    prisma.room.count({ where: query }),
   ]);
 
   return (
@@ -154,8 +154,8 @@ const EventListPage = async ({
             <button className="w-8 h-8 flex items-center justify-center rounded-full bg-lamaYellow">
               <Image src="/sort.png" alt="" width={14} height={14} />
             </button>
-            {/*WHAT THIS IN THE ANNOUNCEMENT PAGE*/}
-            {(role === "admin" || role === "teacher" || role === "student" ) && <FormContainer table="event" type="create" />} 
+            {/*Want THIS IN THE ANNOUNCEMENT PAGE*/}
+            {(role === "admin" || role === "lecturer" || role === "student" ) && <FormContainer table="room" type="create" />} 
           </div>
         </div>
       </div>
@@ -167,4 +167,4 @@ const EventListPage = async ({
   );
 };
 
-export default EventListPage;
+export default RoomListPage;

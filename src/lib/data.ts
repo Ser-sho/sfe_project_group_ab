@@ -2,10 +2,10 @@
 
 export let role = "student";
 
-export const teachersData = [
+export const lecturersData = [
   {
     id: 1,
-    teacherId: "1234567890",
+    lecturerId: "1234567890",
     name: "John Doe",
     email: "john@doe.com",
     photo:
@@ -17,7 +17,7 @@ export const teachersData = [
   },
   {
     id: 2,
-    teacherId: "1234567890",
+    lecturerId: "1234567890",
     name: "Jane Doe",
     email: "jane@doe.com",
     photo:
@@ -29,7 +29,7 @@ export const teachersData = [
   },
   {
     id: 3,
-    teacherId: "1234567890",
+    lecturerId: "1234567890",
     name: "Mike Geller",
     email: "mike@geller.com",
     photo:
@@ -41,7 +41,7 @@ export const teachersData = [
   },
   {
     id: 4,
-    teacherId: "1234567890",
+    lecturerId: "1234567890",
     name: "Jay French",
     email: "jay@gmail.com",
     photo:
@@ -53,7 +53,7 @@ export const teachersData = [
   },
   {
     id: 5,
-    teacherId: "1234567890",
+    lecturerId: "1234567890",
     name: "Jane Smith",
     email: "jane@gmail.com",
     photo:
@@ -65,7 +65,7 @@ export const teachersData = [
   },
   {
     id: 6,
-    teacherId: "1234567890",
+    lecturerId: "1234567890",
     name: "Anna Santiago",
     email: "anna@gmail.com",
     photo:
@@ -77,7 +77,7 @@ export const teachersData = [
   },
   {
     id: 7,
-    teacherId: "1234567890",
+    lecturerId: "1234567890",
     name: "Allen Black",
     email: "allen@black.com",
     photo:
@@ -89,7 +89,7 @@ export const teachersData = [
   },
   {
     id: 8,
-    teacherId: "1234567890",
+    lecturerId: "1234567890",
     name: "Ophelia Castro",
     email: "ophelia@castro.com",
     photo:
@@ -101,7 +101,7 @@ export const teachersData = [
   },
   {
     id: 9,
-    teacherId: "1234567890",
+    lecturerId: "1234567890",
     name: "Derek Briggs",
     email: "derek@briggs.com",
     photo:
@@ -113,7 +113,7 @@ export const teachersData = [
   },
   {
     id: 10,
-    teacherId: "1234567890",
+    lecturerId: "1234567890",
     name: "John Glover",
     email: "john@glover.com",
     photo:
@@ -335,52 +335,52 @@ export const subjectsData = [
   {
     id: 1,
     name: "Math",
-    teachers: ["Alice Phelps", "Russell Davidson"],
+    lecturers: ["Alice Phelps", "Russell Davidson"],
   },
   {
     id: 2,
     name: "English",
-    teachers: ["Manuel Becker", "Eddie Chavez"],
+    lecturers: ["Manuel Becker", "Eddie Chavez"],
   },
   {
     id: 3,
     name: "Physics",
-    teachers: ["Lola Newman", "Darrell Delgado"],
+    lecturers: ["Lola Newman", "Darrell Delgado"],
   },
   {
     id: 4,
     name: "Chemistry",
-    teachers: ["Nathan Kelly", "Benjamin Snyder"],
+    lecturers: ["Nathan Kelly", "Benjamin Snyder"],
   },
   {
     id: 5,
     name: "Biology",
-    teachers: ["Alma Benson", "Lina Collier"],
+    lecturers: ["Alma Benson", "Lina Collier"],
   },
   {
     id: 6,
     name: "History",
-    teachers: ["Hannah Bowman", "Betty Obrien"],
+    lecturers: ["Hannah Bowman", "Betty Obrien"],
   },
   {
     id: 7,
     name: "Geography",
-    teachers: ["Lora French", "Sue Brady"],
+    lecturers: ["Lora French", "Sue Brady"],
   },
   {
     id: 8,
     name: "Art",
-    teachers: ["Harriet Alvarado", "Mayme Keller"],
+    lecturers: ["Harriet Alvarado", "Mayme Keller"],
   },
   {
     id: 9,
     name: "Music",
-    teachers: ["Gertrude Roy", "Rosa Singleton"],
+    lecturers: ["Gertrude Roy", "Rosa Singleton"],
   },
   {
     id: 10,
     name: "Literature",
-    teachers: ["Effie Lynch", "Brett Flowers"],
+    lecturers: ["Effie Lynch", "Brett Flowers"],
   },
 ];
 
@@ -462,61 +462,61 @@ export const lessonsData = [
     id: 1,
     subject: "Math",
     class: "1A",
-    teacher: "Tommy Wise",
+    lecturer: "Tommy Wise",
   },
   {
     id: 2,
     subject: "English",
     class: "2A",
-    teacher: "Rhoda Frank",
+    lecturer: "Rhoda Frank",
   },
   {
     id: 3,
     subject: "Science",
     class: "3A",
-    teacher: "Della Dunn",
+    lecturer: "Della Dunn",
   },
   {
     id: 4,
     subject: "Social Studies",
     class: "1B",
-    teacher: "Bruce Rodriguez",
+    lecturer: "Bruce Rodriguez",
   },
   {
     id: 5,
     subject: "Art",
     class: "4A",
-    teacher: "Birdie Butler",
+    lecturer: "Birdie Butler",
   },
   {
     id: 6,
     subject: "Music",
     class: "5A",
-    teacher: "Bettie Oliver",
+    lecturer: "Bettie Oliver",
   },
   {
     id: 7,
     subject: "History",
     class: "6A",
-    teacher: "Herman Howard",
+    lecturer: "Herman Howard",
   },
   {
     id: 8,
     subject: "Geography",
     class: "6B",
-    teacher: "Lucinda Thomas",
+    lecturer: "Lucinda Thomas",
   },
   {
     id: 9,
     subject: "Physics",
     class: "6C",
-    teacher: "Ronald Roberts",
+    lecturer: "Ronald Roberts",
   },
   {
     id: 10,
     subject: "Chemistry",
     class: "4B",
-    teacher: "Julia Pittman",
+    lecturer: "Julia Pittman",
   },
 ];
 
@@ -525,70 +525,70 @@ export const examsData = [
     id: 1,
     subject: "Math",
     class: "1A",
-    teacher: "Martha Morris",
+    lecturer: "Martha Morris",
     date: "2025-01-01",
   },
   {
     id: 2,
     subject: "English",
     class: "2A",
-    teacher: "Randall Garcia",
+    lecturer: "Randall Garcia",
     date: "2025-01-01",
   },
   {
     id: 3,
     subject: "Science",
     class: "3A",
-    teacher: "Myrtie Scott",
+    lecturer: "Myrtie Scott",
     date: "2025-01-01",
   },
   {
     id: 4,
     subject: "Social Studies",
     class: "1B",
-    teacher: "Alvin Swanson",
+    lecturer: "Alvin Swanson",
     date: "2025-01-01",
   },
   {
     id: 5,
     subject: "Art",
     class: "4A",
-    teacher: "Mabelle Wallace",
+    lecturer: "Mabelle Wallace",
     date: "2025-01-01",
   },
   {
     id: 6,
     subject: "Music",
     class: "5A",
-    teacher: "Dale Thompson",
+    lecturer: "Dale Thompson",
     date: "2025-01-01",
   },
   {
     id: 7,
     subject: "History",
     class: "6A",
-    teacher: "Allie Conner",
+    lecturer: "Allie Conner",
     date: "2025-01-01",
   },
   {
     id: 8,
     subject: "Geography",
     class: "6B",
-    teacher: "Hunter Fuller",
+    lecturer: "Hunter Fuller",
     date: "2025-01-01",
   },
   {
     id: 9,
     subject: "Physics",
     class: "7A",
-    teacher: "Lois Lindsey",
+    lecturer: "Lois Lindsey",
     date: "2025-01-01",
   },
   {
     id: 10,
     subject: "Chemistry",
     class: "8A",
-    teacher: "Vera Soto",
+    lecturer: "Vera Soto",
     date: "2025-01-01",
   },
 ];
@@ -598,70 +598,70 @@ export const assignmentsData = [
     id: 1,
     subject: "Math",
     class: "1A",
-    teacher: "Anthony Boone",
+    lecturer: "Anthony Boone",
     dueDate: "2025-01-01",
   },
   {
     id: 2,
     subject: "English",
     class: "2A",
-    teacher: "Clifford Bowen",
+    lecturer: "Clifford Bowen",
     dueDate: "2025-01-01",
   },
   {
     id: 3,
     subject: "Science",
     class: "3A",
-    teacher: "Catherine Malone",
+    lecturer: "Catherine Malone",
     dueDate: "2025-01-01",
   },
   {
     id: 4,
     subject: "Social Studies",
     class: "1B",
-    teacher: "Willie Medina",
+    lecturer: "Willie Medina",
     dueDate: "2025-01-01",
   },
   {
     id: 5,
     subject: "Art",
     class: "4A",
-    teacher: "Jose Ruiz",
+    lecturer: "Jose Ruiz",
     dueDate: "2025-01-01",
   },
   {
     id: 6,
     subject: "Music",
     class: "5A",
-    teacher: "Katharine Owens",
+    lecturer: "Katharine Owens",
     dueDate: "2025-01-01",
   },
   {
     id: 7,
     subject: "History",
     class: "6A",
-    teacher: "Shawn Norman",
+    lecturer: "Shawn Norman",
     dueDate: "2025-01-01",
   },
   {
     id: 8,
     subject: "Geography",
     class: "6B",
-    teacher: "Don Holloway",
+    lecturer: "Don Holloway",
     dueDate: "2025-01-01",
   },
   {
     id: 9,
     subject: "Physics",
     class: "7A",
-    teacher: "Franklin Gregory",
+    lecturer: "Franklin Gregory",
     dueDate: "2025-01-01",
   },
   {
     id: 10,
     subject: "Chemistry",
     class: "8A",
-    teacher: "Danny Nguyen",
+    lecturer: "Danny Nguyen",
     dueDate: "2025-01-01",
   },
 ];
@@ -671,7 +671,7 @@ export const resultsData = [
     id: 1,
     subject: "Math",
     class: "1A",
-    teacher: "John Doe",
+    lecturer: "John Doe",
     student: "John Doe",
     date: "2025-01-01",
     type: "exam",
@@ -681,7 +681,7 @@ export const resultsData = [
     id: 2,
     subject: "English",
     class: "2A",
-    teacher: "John Doe",
+    lecturer: "John Doe",
     student: "John Doe",
     date: "2025-01-01",
     type: "exam",
@@ -691,7 +691,7 @@ export const resultsData = [
     id: 3,
     subject: "Science",
     class: "3A",
-    teacher: "John Doe",
+    lecturer: "John Doe",
     student: "John Doe",
     date: "2025-01-01",
     type: "exam",
@@ -701,7 +701,7 @@ export const resultsData = [
     id: 4,
     subject: "Social Studies",
     class: "1B",
-    teacher: "John Doe",
+    lecturer: "John Doe",
     student: "John Doe",
     date: "2025-01-01",
     type: "exam",
@@ -711,7 +711,7 @@ export const resultsData = [
     id: 5,
     subject: "Art",
     class: "4A",
-    teacher: "John Doe",
+    lecturer: "John Doe",
     student: "John Doe",
     date: "2025-01-01",
     type: "exam",
@@ -721,7 +721,7 @@ export const resultsData = [
     id: 6,
     subject: "Music",
     class: "5A",
-    teacher: "John Doe",
+    lecturer: "John Doe",
     student: "John Doe",
     date: "2025-01-01",
     type: "exam",
@@ -731,7 +731,7 @@ export const resultsData = [
     id: 7,
     subject: "History",
     class: "6A",
-    teacher: "John Doe",
+    lecturer: "John Doe",
     student: "John Doe",
     date: "2025-01-01",
     type: "exam",
@@ -741,7 +741,7 @@ export const resultsData = [
     id: 8,
     subject: "Geography",
     class: "6B",
-    teacher: "John Doe",
+    lecturer: "John Doe",
     student: "John Doe",
     date: "2025-01-01",
     type: "exam",
@@ -751,7 +751,7 @@ export const resultsData = [
     id: 9,
     subject: "Physics",
     class: "7A",
-    teacher: "John Doe",
+    lecturer: "John Doe",
     student: "John Doe",
     date: "2025-01-01",
     type: "exam",
@@ -761,7 +761,7 @@ export const resultsData = [
     id: 10,
     subject: "Chemistry",
     class: "8A",
-    teacher: "John Doe",
+    lecturer: "John Doe",
     student: "John Doe",
     date: "2025-01-01",
     type: "exam",
@@ -769,7 +769,7 @@ export const resultsData = [
   },
 ];
 
-export const eventsData = [
+export const roomsData = [
   {
     id: 1,
     title: "Lake Trip",

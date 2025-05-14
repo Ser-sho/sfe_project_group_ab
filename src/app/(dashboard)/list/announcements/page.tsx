@@ -35,7 +35,7 @@ const AnnouncementListPage = async ({
       className: "hidden md:table-cell",
     },
     // ADD TEACHER COPY IT IN THE ASSIGNMENT PAGE
-    ...(role === "admin" || role === "teacher"
+    ...(role === "admin" || role === "lecturer"
       ? [
           {
             header: "Actions",
@@ -57,7 +57,7 @@ const AnnouncementListPage = async ({
       </td>
       <td>
         <div className="flex items-center gap-2">
-          {(role === "admin" || role === "teacher") && ( //ADD TEARCHER
+          {(role === "admin" || role === "lecturer") && ( //ADD Lecturer
             <>
               <FormContainer table="announcement" type="update" data={item} />
               <FormContainer table="announcement" type="delete" id={item.id} />
@@ -92,7 +92,7 @@ const AnnouncementListPage = async ({
   // ROLE CONDITIONS
 
   const roleConditions = {
-    teacher: { lessons: { some: { teacherId: currentUserId! } } },
+    lecturer: { lessons: { some: { lecturerId: currentUserId! } } },
     student: { students: { some: { id: currentUserId! } } },
     parent: { students: { some: { parentId: currentUserId! } } },
   };
@@ -133,7 +133,7 @@ const AnnouncementListPage = async ({
             <button className="w-8 h-8 flex items-center justify-center rounded-full bg-lamaYellow">
               <Image src="/sort.png" alt="" width={14} height={14} />
             </button>
-            {(role === "admin" || role === "teacher")&& ( // ADD TEACHER
+            {(role === "admin" || role === "lecturer")&& ( // ADD Lecturer
               <FormContainer table="announcement" type="create" />
             )}
           </div>

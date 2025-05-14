@@ -5,14 +5,14 @@ import { useForm } from "react-hook-form";
 import InputField from "../InputField";
 import Image from "next/image";
 import { Dispatch, SetStateAction, useEffect, useState } from "react";
-import { teacherSchema, TeacherSchema } from "@/lib/formValidationSchemas";
+import { LecturerSchema, lecturerSchema, } from "@/lib/formValidationSchemas";
 import { useFormState } from "react-dom";
-import { createTeacher, updateTeacher } from "@/lib/actions";
+import { createLecturer, updateLecturer } from "@/lib/actions";
 import { useRouter } from "next/navigation";
 import { toast } from "react-toastify";
 import { CldUploadWidget } from "next-cloudinary";
 
-const TeacherForm = ({
+const LecturerForm = ({
   type,
   data,
   setOpen,
@@ -27,14 +27,14 @@ const TeacherForm = ({
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<TeacherSchema>({
-    resolver: zodResolver(teacherSchema),
+  } = useForm<LecturerSchema>({
+    resolver: zodResolver(lecturerSchema),
   });
 
   const [img, setImg] = useState<any>();
 
   const [state, formAction] = useFormState(
-    type === "create" ? createTeacher : updateTeacher,
+    type === "create" ? createLecturer : updateLecturer,
     {
       success: false,
       error: false,
@@ -50,7 +50,7 @@ const TeacherForm = ({
 
   useEffect(() => {
     if (state.success) {
-      toast(`Teacher has been ${type === "create" ? "created" : "updated"}!`);
+      toast(`Lecturer has been ${type === "create" ? "created" : "updated"}!`);
       setOpen(false);
       router.refresh();
     }
@@ -61,7 +61,7 @@ const TeacherForm = ({
   return (
     <form className="flex flex-col gap-8" onSubmit={onSubmit}>
       <h1 className="text-xl font-semibold">
-        {type === "create" ? "Create a new teacher" : "Update the teacher"}
+        {type === "create" ? "Create a new Lecturer" : "Update the Lecturer"}
       </h1>
       <span className="text-xs text-gray-400 font-medium">
         Authentication Information
@@ -213,5 +213,5 @@ const TeacherForm = ({
   );
 };
 
-export default TeacherForm;
+export default LecturerForm;
 {/**/}

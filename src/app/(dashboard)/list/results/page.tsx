@@ -14,8 +14,8 @@ type ResultList = {
   title: string;
   studentName: string;
   studentSurname: string;
-  teacherName: string;
-  teacherSurname: string;
+  lecturerName: string;
+  lecturerSurname: string;
   score: number;
   className: string;
   startTime: Date;
@@ -48,8 +48,8 @@ const columns = [
     className: "hidden md:table-cell",
   },
   {
-    header: "Teacher",
-    accessor: "teacher",
+    header: "Lecturer",
+    accessor: "lecturer",
     className: "hidden md:table-cell",
   },
   {
@@ -62,7 +62,7 @@ const columns = [
     accessor: "date",
     className: "hidden md:table-cell",
   },
-  ...(role === "admin" || role === "teacher"
+  ...(role === "admin" || role === "lecturer"
     ? [
         {
           header: "Actions",
@@ -81,7 +81,7 @@ const renderRow = (item: ResultList) => (
     <td>{item.studentName + " " + item.studentName}</td>
     <td className="hidden md:table-cell">{item.score}</td>
     <td className="hidden md:table-cell">
-      {item.teacherName + " " + item.teacherSurname}
+      {item.lecturerName + " " + item.lecturerSurname}
     </td>
     <td className="hidden md:table-cell">{item.className}</td>
     <td className="hidden md:table-cell">
@@ -89,7 +89,7 @@ const renderRow = (item: ResultList) => (
     </td>
     <td>
       <div className="flex items-center gap-2">
-        {(role === "admin" || role === "teacher") && (
+        {(role === "admin" || role === "lecturer") && (
           <>
             <FormContainer table="result" type="update" data={item} />
             <FormContainer table="result" type="delete" id={item.id} />
@@ -133,10 +133,10 @@ const renderRow = (item: ResultList) => (
   switch (role) {
     case "admin":
       break;
-    case "teacher":
+    case "lecturer":
       query.OR = [
-        { exam: { lesson: { teacherId: currentUserId! } } },
-        { assignment: { lesson: { teacherId: currentUserId! } } },
+        { exam: { lesson: { lecturerId: currentUserId! } } },
+        { assignment: { lesson: { lecturerId: currentUserId! } } },
       ];
       break;
 
@@ -163,7 +163,7 @@ const renderRow = (item: ResultList) => (
             lesson: {
               select: {
                 class: { select: { name: true } },
-                teacher: { select: { name: true, surname: true } },
+                lecturer: { select: { name: true, surname: true } },
               },
             },
           },
@@ -173,7 +173,7 @@ const renderRow = (item: ResultList) => (
             lesson: {
               select: {
                 class: { select: { name: true } },
-                teacher: { select: { name: true, surname: true } },
+                lecturer: { select: { name: true, surname: true } },
               },
             },
           },
@@ -197,8 +197,8 @@ const renderRow = (item: ResultList) => (
       title: assessment.title,
       studentName: item.student.name,
       studentSurname: item.student.surname,
-      teacherName: assessment.lesson.teacher.name,
-      teacherSurname: assessment.lesson.teacher.surname,
+      lecturerName: assessment.lesson.lecturer.name,
+      lecturerSurname: assessment.lesson.lecturer.surname,
       score: item.score,
       className: assessment.lesson.class.name,
       startTime: isExam ? assessment.startTime : assessment.startDate,
@@ -219,7 +219,7 @@ const renderRow = (item: ResultList) => (
             <button className="w-8 h-8 flex items-center justify-center rounded-full bg-lamaYellow">
               <Image src="/sort.png" alt="" width={14} height={14} />
             </button>
-            {(role === "admin" || role === "teacher") && (
+            {(role === "admin" || role === "lecturer") && (
               <FormContainer table="result" type="create" />
             )}
           </div>

@@ -1,7 +1,7 @@
 import Announcements from "@/components/Announcements";
 import BigCalendarContainer from "@/components/BigCalendarContainer";
+import RoomCalendar from "@/components/RoomCalendar";
 //import BigCalendar from "@/components/BigCalender";
-import EventCalendar from "@/components/EventCalendar";
 import prisma from "@/lib/prisma";
 import { auth } from "@clerk/nextjs/server";
 
@@ -27,7 +27,7 @@ const StudentPage = async () => {
       </div>
       {/* RIGHT */}
       <div className="w-full xl:w-1/3 flex flex-col gap-8">
-        <EventCalendar />
+        <RoomCalendar />
         <Announcements />
       </div>
     </div>

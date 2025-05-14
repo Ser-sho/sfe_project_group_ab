@@ -54,15 +54,15 @@ async function main() {
     await prisma.subject.create({ data: subject });
   }
 
-  // TEACHER
+  // Lecturer
   for (let i = 1; i <= 15; i++) {
-    await prisma.teacher.create({
+    await prisma.lecturer.create({
       data: {
-        id: `teacher${i}`, // Unique ID for the teacher
-        username: `teacher${i}`,
+        id: `lecturer${i}`, // Unique ID for the lecturer
+        username: `lecturer${i}`,
         name: `TName${i}`,
         surname: `TSurname${i}`,
-        email: `teacher${i}@example.com`,
+        email: `lecturer${i}@example.com`,
         phone: `123-456-789${i}`,
         address: `Address${i}`,
         bloodType: "A+",
@@ -88,7 +88,7 @@ async function main() {
         endTime: new Date(new Date().setHours(new Date().getHours() + 3)), 
         subjectId: (i % 10) + 1, 
         classId: (i % 6) + 1, 
-        teacherId: `teacher${(i % 15) + 1}`, 
+        lecturerId: `lecturer${(i % 15) + 1}`, 
       },
     });
   }
@@ -176,12 +176,12 @@ async function main() {
     });
   }
 
-  // EVENT
+  // Room
   for (let i = 1; i <= 5; i++) {
-    await prisma.event.create({
+    await prisma.room.create({
       data: {
-        title: `Event ${i}`, 
-        description: `Description for Event ${i}`, 
+        title: `Room ${i}`, 
+        description: `Description for Room ${i}`, 
         startTime: new Date(new Date().setHours(new Date().getHours() + 1)), 
         endTime: new Date(new Date().setHours(new Date().getHours() + 2)), 
         classId: (i % 5) + 1, 

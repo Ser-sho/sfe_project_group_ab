@@ -4,12 +4,12 @@ import Table from "@/components/Table";
 import TableSearch from "@/components/TableSearch";
 import prisma from "@/lib/prisma";
 import { ITEM_PER_PAGE } from "@/lib/settings";
-import { Class, Lesson, Prisma, Subject, Teacher } from "@prisma/client";
+import { Class, Lesson, Prisma, Subject, Lecturer } from "@prisma/client";
 import Image from "next/image";
 import { auth } from "@clerk/nextjs/server";
 
 type LessonList = Lesson & { subject: Subject } & { class: Class } & {
-  teacher: Teacher;
+  lecturer: Lecturer;
 };
 
 
@@ -33,8 +33,8 @@ const columns = [
     accessor: "class",
   },
   {
-    header: "Teacher",
-    accessor: "teacher",
+    header: "Lecturer",
+    accessor: "lecturer",
     className: "hidden md:table-cell",
   },
   ...(role === "admin" // I MUST CHANGE THIS - WHAT THIS IN THE ANNOUNCEMENT PAGE
@@ -55,7 +55,7 @@ const renderRow = (item: LessonList) => (
     <td className="flex items-center gap-4 p-4">{item.subject.name}</td>
     <td>{item.class.name}</td>
     <td className="hidden md:table-cell">
-      {item.teacher.name + " " + item.teacher.surname}
+      {item.lecturer.name + " " + item.lecturer.surname}
     </td>
     <td>
       <div className="flex items-center gap-2">
@@ -85,13 +85,13 @@ const renderRow = (item: LessonList) => (
           case "classId":
             query.classId = parseInt(value);
             break;
-          case "teacherId":
-            query.teacherId = value;
+          case "lecturerId":
+            query.lecturerId = value;
             break;
           case "search":
             query.OR = [
               { subject: { name: { contains: value, mode: "insensitive" } } },
-              { teacher: { name: { contains: value, mode: "insensitive" } } },
+              { lecturer: { name: { contains: value, mode: "insensitive" } } },
             ];
             break;
           default:
@@ -107,7 +107,7 @@ const renderRow = (item: LessonList) => (
       include: {
         subject: { select: { name: true } },
         class: { select: { name: true } },
-        teacher: { select: { name: true, surname: true } },
+        lecturer: { select: { name: true, surname: true } },
       },
       take: ITEM_PER_PAGE,
       skip: ITEM_PER_PAGE * (p - 1),
