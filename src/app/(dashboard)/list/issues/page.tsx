@@ -18,7 +18,6 @@ const IssueListPage = async ({ searchParams }: { searchParams: { [key: string]: 
     { header: "Title", accessor: "title" },
     { header: "Description", accessor: "description", className: "hidden md:table-cell" },
     { header: "Status", accessor: "status" },
-    { header: "created At ", accessor: "createdAt ", className: "hidden md:table-cell" },
     ...(role === "admin" ? [{ header: "Actions", accessor: "action" }] : []),
   ];
 
@@ -27,9 +26,6 @@ const IssueListPage = async ({ searchParams }: { searchParams: { [key: string]: 
       <td className="p-4">{item.title}</td>
       <td className="hidden md:table-cell">{item.description}</td>
       <td>{item.status}</td>
-       <td className="hidden md:table-cell">
-        {new Intl.DateTimeFormat("en-US").format(item.createdAt)}
-      </td>
       <td>
         {(role === "admin") && (
           <>

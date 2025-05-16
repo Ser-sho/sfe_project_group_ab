@@ -76,14 +76,6 @@ const IssueForm = ({
           register={register}
           error={errors?.description}
         />
-        <InputField
-          label="Issue createdAt"
-          name="createdAt"
-          defaultValue={data?.datetime}
-          register={register}
-          error={errors?.createdAt}
-          type="datetime-local"
-        />
         {data && (
           <InputField
             label="Id"
@@ -165,7 +157,7 @@ const IssueForm = ({
         <span className="text-red-500">Something went wrong!</span>
       )}
       
-      <button className="bg-blue-400 text-white p-2 rounded-md">
+      <button type="submit" className="bg-blue-400 text-white p-2 rounded-md">
         {type === "create" ? "Report Issue" : "Update Issue"}
       </button>
     </form>

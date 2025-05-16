@@ -860,7 +860,7 @@ export const createIssue = async (
         title: data.title,
         description: data.description,
         status: data.status,
-        createdAt : data.createdAt,
+       //createdAt : data.createdAt,
         studentId: data.studentId || null,
         lecturerId: data.lecturerId || null,
       },
@@ -879,7 +879,8 @@ export const updateIssue = async (currentState: CurrentState, data: IssueSchema)
   if (!data.id) {
     return { success: false, error: true };
   }
-   
+   console.log("update issue in DB..."); // Debugging check
+    
   try {
     await prisma.issue.update({
       where: { id: data.id },

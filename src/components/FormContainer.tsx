@@ -134,15 +134,14 @@ const FormContainer = async ({ table, type, data, id }: FormContainerProps) => {
         relatedData = { students: resultStudents ,assignments: resultAssignments ,exams: resultExams };
         break;
          case "issue": // Issue Reporting
-         console.log("Fetching available issue at:");
-        const Issuestudents = await prisma.student.findMany({
+        console.log("Fetching available issue by:");
+        const students = await prisma.student.findMany({
           select: { id: true, name: true, surname: true },
         });
-        console.log("Fetching available issue at:");
-        const Issuelecturers = await prisma.lecturer.findMany({
+        const lecturers = await prisma.lecturer.findMany({
           select: { id: true, name: true, surname: true },
         });
-        relatedData = { students: Issuestudents, lecturers: Issuelecturers };
+        relatedData = { students, lecturers };
         break;
 
       default:

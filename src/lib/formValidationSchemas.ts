@@ -154,7 +154,6 @@ export const issueSchema = z.object({
   title: z.string().min(1, { message: "Title is required!" }),
   description: z.string().min(1, { message: "Description is required!" }),
   status: z.enum(["PENDING", "IN_PROGRESS", "FIXED", "NOT_FIXED"]),
-  createdAt: z.coerce.date({ message: "dueDate is required!" }),
   studentId: z.string().optional(),
   lecturerId: z.string().optional(),
 });

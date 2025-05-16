@@ -9,7 +9,7 @@ services:
       POSTGRES_PASSWORD: mypassword
       POSTGRES_DB: mydb
     ports:
-      - '5432:5432'
+      - '5423:5432'
     volumes:
       - postgres_data:/var/lib/postgresql/data
     
@@ -19,7 +19,7 @@ services:
     ports:
       - '3000:3000'
     environment:
-      - DATABASE_URL: postgresql://myuser:mypassword@[MY_SERVER_IP]:5432/mydb
+      - DATABASE_URL: postgresql://myuser:mypassword@[MY_SERVER_IP]:5423/mydb
     depends_on:
       - postgres
 
