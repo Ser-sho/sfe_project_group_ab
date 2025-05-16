@@ -2,7 +2,7 @@ import Announcements from "@/components/Announcements";
 import BigCalendarContainer from "@/components/BigCalendarContainer";
 import RoomCalendar from "@/components/RoomCalendar";
 import { auth } from "@clerk/nextjs/server";
-
+export const dynamic = "force-dynamic";
 const LecturerPage = () => {
   const { userId } = auth();
   return (
