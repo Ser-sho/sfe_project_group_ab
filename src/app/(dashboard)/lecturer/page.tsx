@@ -3,8 +3,10 @@ import BigCalendarContainer from "@/components/BigCalendarContainer";
 import RoomCalendar from "@/components/RoomCalendar";
 import { auth } from "@clerk/nextjs/server";
 export const dynamic = "force-dynamic";
-const LecturerPage = () => {
-  const { userId } = auth();
+
+const LecturerPage = async () => {
+  const { userId } = await auth(); // ✅ fixed: added await
+
   return (
     <div className="flex-1 p-4 flex gap-4 flex-col xl:flex-row">
       {/* LEFT */}

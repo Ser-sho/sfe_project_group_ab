@@ -5,7 +5,7 @@ import { auth } from "@clerk/nextjs/server";
 
 export const dynamic = "force-dynamic";
 const ParentPage = async () => {
-  const { userId } = auth();
+  const { userId } = await auth();
   const currentUserId = userId;
   
   const students = await prisma.student.findMany({

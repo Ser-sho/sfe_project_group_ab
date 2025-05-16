@@ -10,9 +10,9 @@ import { auth } from "@clerk/nextjs/server";
 export const dynamic = "force-dynamic";
 // Fetch issues and ensure role-based access
 const IssueListPage = async ({ searchParams }: { searchParams: { [key: string]: string | undefined } }) => {
-  const { userId, sessionClaims } = auth();
+  const { userId, sessionClaims } = await auth();
   const role = (sessionClaims?.metadata as { role?: string })?.role;
-  const currentUserId = userId;
+  const currentUserId = await userId;
   
   const columns = [
     { header: "Title", accessor: "title" },
