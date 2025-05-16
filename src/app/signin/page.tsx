@@ -18,6 +18,8 @@ const LoginPage = () => {
     if (role) {
       router.push(`/${role}`);
     }
+
+    
   }, [user, router]);
 
   return (

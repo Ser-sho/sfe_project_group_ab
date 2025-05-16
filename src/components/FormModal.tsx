@@ -5,6 +5,7 @@ import {
   deleteAssignment,
   deleteClass,
   deleteExam,
+  deleteIssue,
   deleteLecturer,
   deleteLesson,
   deleteResult,
@@ -19,8 +20,6 @@ import { Dispatch, SetStateAction, useEffect, useState } from "react";
 import { useFormState } from "react-dom";
 import { toast } from "react-toastify";
 import { FormContainerProps } from "./FormContainer";
-//import Announcements from "./Announcements";
-//import AnnouncementForm from "./forms/AnnouncementForm";
 
 const deleteActionMap = {
   subject: deleteSubject,
@@ -33,6 +32,7 @@ const deleteActionMap = {
   assignment: deleteAssignment,
   result: deleteResult,
   announcement: deleteAnnouncement,
+  issue: deleteIssue,
 // TODO: OTHER DELETE ACTIONS
   parent: deleteSubject,
   attendance: deleteSubject,
@@ -72,6 +72,9 @@ const AssignmentForm = dynamic(() => import("./forms/AssignmentForm"), {
   loading: () => <h1>Loading...</h1>,
 });
 const ResultForm = dynamic(() => import("./forms/ResultForm"), {
+  loading: () => <h1>Loading...</h1>,
+});
+const IssueForm = dynamic(() => import("./forms/IssueForm"), {
   loading: () => <h1>Loading...</h1>,
 });
 // TODO: the remaining   forms such as the announcements 
@@ -163,6 +166,15 @@ const forms: {
   ),
   result: (setOpen, type, data, relatedData) => (
     <ResultForm
+      type={type}
+      data={data}
+      setOpen={setOpen}
+      relatedData={relatedData}
+    />
+    // TODO OTHER LIST ITEMS
+  ),
+  issue: (setOpen, type, data, relatedData) => (
+    <IssueForm
       type={type}
       data={data}
       setOpen={setOpen}

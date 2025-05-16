@@ -12,6 +12,7 @@ import {
   LessonSchema,
   AssignmentSchema,
   ResultSchema,
+  IssueSchema,
 } from "./formValidationSchemas";
 import prisma from "./prisma";
 import { clerkClient } from "@clerk/nextjs/server";
@@ -841,6 +842,71 @@ export const deleteResult = async (
     return { success: true, error: false };
   } catch (err) {
     console.log(err);
+    return { success: false, error: true };
+  }
+};
+
+
+// CREATE ISSUE
+export const createIssue = async (
+  currentState: CurrentState,
+  data: IssueSchema
+) => {
+  try {
+    console.log("Creating issue in DB..."); // Debugging check
+    
+    await prisma.issue.create({
+      data: {
+        title: data.title,
+        description: data.description,
+        status: data.status,
+        createdAt : data.createdAt,
+        studentId: data.studentId || null,
+        lecturerId: data.lecturerId || null,
+      },
+    });
+
+    //revalidatePath("/list/issues"); // Refresh issue list
+    return { success: true, error: false };
+  } catch (err) {
+    console.error(err);
+    return { success: false, error: true };
+  }
+};
+
+// UPDATE ISSUE (Admin Can Update Status)
+export const updateIssue = async (currentState: CurrentState, data: IssueSchema) => {
+  if (!data.id) {
+    return { success: false, error: true };
+  }
+   
+  try {
+    await prisma.issue.update({
+      where: { id: data.id },
+      data: { status: data.status },
+    });
+
+    //revalidatePath("/list/issues"); // Refresh issue list
+    return { success: true, error: false };
+  } catch (err) {
+    console.error(err);
+    return { success: false, error: true };
+  }
+};
+
+// DELETE ISSUE
+export const deleteIssue = async (currentState: CurrentState, data: FormData) => {
+  const id = data.get("id") as string;
+
+  try {
+    await prisma.issue.delete({
+      where: { id: parseInt(id) },
+    });
+
+    //revalidatePath("/list/issues"); // Refresh issue list
+    return { success: true, error: false };
+  } catch (err) {
+    console.error(err);
     return { success: false, error: true };
   }
 };

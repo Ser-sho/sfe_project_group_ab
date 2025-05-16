@@ -1,4 +1,4 @@
-import { Day, PrismaClient, UserSex } from "@prisma/client";
+import { Day, PrismaClient, UserSex,IssueStatus  } from "@prisma/client";
 const prisma = new PrismaClient();
 
 async function main() {
@@ -188,6 +188,20 @@ async function main() {
       },
     });
   }
+
+  // ISSUE REPORTS
+for (let i = 1; i <= 10; i++) {
+  await prisma.issue.create({
+    data: {
+      title: `Issue ${i}`,
+      description: `This is a description for issue ${i}`,
+      status: i % 3 === 0 ? IssueStatus.IN_PROGRESS : IssueStatus.PENDING,
+      studentId: i % 2 === 0 ? `student${i}` : null, // Assigning some issues to students
+      lecturerId: i % 2 !== 0 ? `lecturer${i}` : null, // Assigning some issues to lecturers
+    },
+  });
+}
+
 
   // ANNOUNCEMENTS
   for (let i = 1; i <= 5; i++) {

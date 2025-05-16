@@ -33,6 +33,7 @@ model Student {
   attendances Attendance[]
   results     Result[]
   birthday    DateTime
+  issues Issue[]
 }
 
 model Lecturer {
@@ -51,6 +52,7 @@ model Lecturer {
   lessons   Lesson[]
   classes   Class[]
   birthday  DateTime
+  issues Issue[]
 }
 
 model Parent {
@@ -179,6 +181,20 @@ model Announcement {
   class   Class? @relation(fields: [classId], references: [id])
 }
 
+model Issue {
+  id          Int         @id @default(autoincrement())
+  title       String
+  description String
+  createdAt   DateTime    @default(now())
+  status      IssueStatus @default(PENDING) 
+
+  studentId   String?
+  student     Student?    @relation(fields: [studentId], references: [id])
+
+  lecturerId  String?
+  lecturer    Lecturer?   @relation(fields: [lecturerId], references: [id])
+}
+
 enum UserSex {
   MALE
   FEMALE
@@ -190,4 +206,11 @@ enum Day {
   WEDNESDAY
   THURSDAY
   FRIDAY
+}
+
+enum IssueStatus {
+  PENDING
+  IN_PROGRESS
+  FIXED
+  NOT_FIXED
 }

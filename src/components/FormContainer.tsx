@@ -16,6 +16,7 @@ export type FormContainerProps = {
     | "result"
     | "attendance"
     | "room"
+    | "issue"
     | "announcement";
   type: "create" | "update" | "delete";
   data?: any;
@@ -77,10 +78,27 @@ const FormContainer = async ({ table, type, data, id }: FormContainerProps) => {
         relatedData = { classes: announcementClass };
         break;
         case "room":
-        const RoomClass = await prisma.class.findMany({
-          include: { _count: { select : { rooms: true } } },
-        });
-        relatedData = { classes: RoomClass };
+         const now = new Date(); // or get startTime/endTime from `data` if updating
+         console.log("Fetching available classes at:", now); // 👈 Add this
+ const availableClasses = await prisma.class.findMany({
+  where: {
+    rooms: {
+      none: {
+        startTime: { lte: now },
+        endTime: { gte: now },
+      },
+    },
+  },
+  include: {
+    _count: {
+      select: { rooms: true },
+    },
+  },
+});
+
+  relatedData = {
+  classes: availableClasses,
+};
         break;
         case "lesson":
         const lessonClasses = await prisma.class.findMany({
@@ -115,8 +133,18 @@ const FormContainer = async ({ table, type, data, id }: FormContainerProps) => {
         });
         relatedData = { students: resultStudents ,assignments: resultAssignments ,exams: resultExams };
         break;
-        
-    
+         case "issue": // Issue Reporting
+         console.log("Fetching available issue at:");
+        const Issuestudents = await prisma.student.findMany({
+          select: { id: true, name: true, surname: true },
+        });
+        console.log("Fetching available issue at:");
+        const Issuelecturers = await prisma.lecturer.findMany({
+          select: { id: true, name: true, surname: true },
+        });
+        relatedData = { students: Issuestudents, lecturers: Issuelecturers };
+        break;
+
       default:
         break;
     }

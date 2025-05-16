@@ -5,7 +5,7 @@ const RoomList = async ({ dateParam }: { dateParam: string | undefined }) => {
 
   const data = await prisma.room.findMany({
     where: {
-      startTime: {
+      startTime: { 
         gte: new Date(date.setHours(0, 0, 0, 0)),
         lte: new Date(date.setHours(23, 59, 59, 999)),
       },
