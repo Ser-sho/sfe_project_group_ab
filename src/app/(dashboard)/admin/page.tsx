@@ -5,6 +5,8 @@ import FinanceChart from "@/components/FinanceChart";
 import UserCard from "@/components/UserCard";
 import RoomCalendarContainer from "@/components/RoomCalendarContainer";
 
+xport const dynamic = "force-dynamic";
+
 const AdminPage = ({
   searchParams,
 }: {
