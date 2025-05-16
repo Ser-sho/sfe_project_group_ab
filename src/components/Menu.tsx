@@ -101,10 +101,15 @@ const menuItems = [
 ];
 
 const Menu = async () => {
-  const user = await currentUser();
-  const role = user?.publicMetadata.role as string;
-  const homeHref = role ? `/${role}` : "/";
+  let role = "";
+  try {
+    const user = await currentUser();
+    role = (user?.publicMetadata?.role as string) || "";
+  } catch (error) {
+    console.error("Error loading user in menu:", error);
+  }
 
+  const homeHref = role ? `/${role}` : "/";
   return (
     <div className="mt-4 text-sm">
       {menuItems.map((section) => (
