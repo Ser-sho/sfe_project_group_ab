@@ -7,7 +7,7 @@ import { ITEM_PER_PAGE } from "@/lib/settings";
 import { Class, Room, Prisma } from "@prisma/client";
 import Image from "next/image";
 import { auth } from "@clerk/nextjs/server";
-
+export const dynamic = "force-dynamic";
 type RoomList = Room & { class: Class };
 
 const RoomListPage = async ({

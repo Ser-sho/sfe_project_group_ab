@@ -4,7 +4,7 @@ import RoomCalendar from "@/components/RoomCalendar";
 //import BigCalendar from "@/components/BigCalender";
 import prisma from "@/lib/prisma";
 import { auth } from "@clerk/nextjs/server";
-
+export const dynamic = "force-dynamic";
 const StudentPage = async () => {
   const { userId } = auth();
 

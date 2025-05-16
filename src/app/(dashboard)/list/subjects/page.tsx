@@ -7,7 +7,7 @@ import { ITEM_PER_PAGE } from "@/lib/settings";
 import { Prisma, Subject, Lecturer } from "@prisma/client";
 import Image from "next/image";
 import { auth } from "@clerk/nextjs/server";
-
+export const dynamic = "force-dynamic";
 type SubjectList = Subject & { lecturers: Lecturer[] };
 
 const SubjectListPage = async ({

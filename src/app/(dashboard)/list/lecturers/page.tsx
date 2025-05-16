@@ -8,7 +8,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { ITEM_PER_PAGE } from "@/lib/settings";
 import { auth } from "@clerk/nextjs/server";
-
+export const dynamic = "force-dynamic";
 type LecturerList = Lecturer & { subjects: Subject[] } & { classes: Class[] };
 
 const LecturerListPage = async ({
